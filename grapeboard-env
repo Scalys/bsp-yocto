@@ -55,9 +55,9 @@ BBPATH = "\${TOPDIR}"
 BBFILES ?= ""
 
 BBLAYERS ?= "\\ 
-  ${BSP_DIR}/sources/meta \\ 
-  ${BSP_DIR}/sources/meta-poky \\ 
-  ${BSP_DIR}/sources/meta-yocto-bsp \\ 
+  ${BSP_DIR}/sources/poky/meta \\ 
+  ${BSP_DIR}/sources/poky/meta-poky \\ 
+  ${BSP_DIR}/sources/poky/meta-yocto-bsp \\ 
   \\ 
   ${BSP_DIR}/sources/meta-openembedded/meta-oe \\ 
   ${BSP_DIR}/sources/meta-openembedded/meta-networking \\ 
