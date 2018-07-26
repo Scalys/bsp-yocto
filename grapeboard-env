@@ -15,7 +15,7 @@ info() {
 
 
 THIS_ENV_FILE="grapeboard-env"
-OE_ENV_FILE="sources/oe-init-build-env"
+OE_ENV_FILE="sources/poky/oe-init-build-env"
 BUILD_DIR="build"
 BSP_DIR="$(pwd)"
 
@@ -24,10 +24,12 @@ BSP_DIR="$(pwd)"
 
 unset GEN_CONF
 [ -f "$BUILD_DIR/conf/bblayers.conf" -a -f "$BUILD_DIR/conf/local.conf" ] || GEN_CONF=y
+source "$OE_ENV_FILE"
+
 if [ -n "$GEN_CONF" ]; then
     mkdir -p "$BUILD_DIR"
 
-    cat <<EOF > "$BUILD_DIR/conf/local.conf"
+    cat <<EOF > "$BSP_DIR/$BUILD_DIR/conf/local.conf"
 MACHINE = "grapeboard"
 DISTRO ?= "poky"
 PACKAGE_CLASSES ?= "package_ipk"
@@ -48,7 +50,7 @@ BB_DISKMON_DIRS = "\\
 CONF_VERSION = "1"
 EOF
 
-    cat <<EOF > "$BUILD_DIR/conf/bblayers.conf"
+    cat <<EOF > "$BSP_DIR/$BUILD_DIR/conf/bblayers.conf"
 POKY_BBLAYERS_CONF_VERSION = "2"
 
 BBPATH = "\${TOPDIR}"
@@ -69,5 +71,3 @@ BBLAYERS ?= "\\
   "
 EOF
 fi
-
-source "$OE_ENV_FILE"
