@@ -1,12 +1,15 @@
 [submodule "sources/poky"]
 	path = sources/poky
 	url = git://git.yoctoproject.org/poky
+	branch = sumo
 [submodule "sources/meta-openembedded"]
 	path = sources/meta-openembedded
 	url = git://git.openembedded.org/meta-openembedded
+	branch = sumo
 [submodule "sources/meta-freescale"]
 	path = sources/meta-freescale
 	url = https://git.yoctoproject.org/cgit/cgit.cgi/meta-freescale
+	branch = sumo
 [submodule "sources/meta-scalys-arm"]
 	path = sources/meta-scalys-arm
 	url = https://ladm@source-ext.sintecs.nl/scalys/meta-scalys-arm
