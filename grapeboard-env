@@ -1,0 +1,73 @@
+# Grapeboard Yocto build environment deployment
+# Author: Lavnikevich Dmitry <dmitry.lavnikevich@edality.by>
+
+
+err() {
+    echo "Error:" $@
+    exit 1
+}
+warn() {
+    echo "Warning:" $@
+}
+info() {
+    echo $@
+}
+
+
+THIS_ENV_FILE="grapeboard-env"
+OE_ENV_FILE="sources/oe-init-build-env"
+BUILD_DIR="build"
+BSP_DIR="$(pwd)"
+
+[ -f "$THIS_ENV_FILE" ] || err "this environment should be sourced from the BSP directory"
+[ -f "$OE_ENV_FILE" ] || err "sources are not pulled"
+
+unset GEN_CONF
+[ -f "$BUILD_DIR/conf/bblayers.conf" -a -f "$BUILD_DIR/conf/local.conf" ] || GEN_CONF=y
+if [ -n "$GEN_CONF" ]; then
+    mkdir -p "$BUILD_DIR"
+
+    cat <<EOF > "$BUILD_DIR/conf/local.conf"
+MACHINE = "grapeboard"
+DISTRO ?= "poky"
+PACKAGE_CLASSES ?= "package_ipk"
+EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+USER_CLASSES ?= "buildstats image-mklibs image-prelink"
+PATCHRESOLVE = "noop"
+
+BB_DISKMON_DIRS = "\\ 
+    STOPTASKS,\${TMPDIR},1G,100K \\ 
+    STOPTASKS,\${DL_DIR},1G,100K \\ 
+    STOPTASKS,\${SSTATE_DIR},1G,100K \\ 
+    STOPTASKS,/tmp,100M,100K \\ 
+    ABORT,\${TMPDIR},100M,1K \\ 
+    ABORT,\${DL_DIR},100M,1K \\ 
+    ABORT,\${SSTATE_DIR},100M,1K \\ 
+    ABORT,/tmp,10M,1K"
+
+CONF_VERSION = "1"
+EOF
+
+    cat <<EOF > "$BUILD_DIR/conf/bblayers.conf"
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "\${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= "\\ 
+  ${BSP_DIR}/sources/meta \\ 
+  ${BSP_DIR}/sources/meta-poky \\ 
+  ${BSP_DIR}/sources/meta-yocto-bsp \\ 
+  \\ 
+  ${BSP_DIR}/sources/meta-openembedded/meta-oe \\ 
+  ${BSP_DIR}/sources/meta-openembedded/meta-networking \\ 
+  ${BSP_DIR}/sources/meta-openembedded/meta-python \\ 
+  \\ 
+  ${BSP_DIR}/sources/meta-freescale \\ 
+  \\ 
+  ${BSP_DIR}/sources/meta-scalys-arm \\ 
+  "
+EOF
+fi
+
+source "$OE_ENV_FILE"
