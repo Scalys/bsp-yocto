@@ -13,3 +13,4 @@
 [submodule "sources/meta-scalys-arm"]
 	path = sources/meta-scalys-arm
 	url = https://ladm@source-ext.sintecs.nl/scalys/meta-scalys-arm
+	branch = master
