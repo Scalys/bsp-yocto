@@ -2,9 +2,45 @@
 # Author: Lavnikevich Dmitry <dmitry.lavnikevich@edality.by>
 
 
+BSP_DIR="$(pwd)"
+THIS_ENV_FILE="grapeboard-env"
+OE_ENV_PATH="$BSP_DIR/sources/poky/oe-init-build-env"
+BUILD_DIR="$BSP_DIR/build"
+SOURCES_DIR="$BSP_DIR/sources"
+
+LOCAL_CONF_PATH="$BUILD_DIR/conf/local.conf"
+LOCAL_CONF_LIST="\
+  STOPTASKS,\${TMPDIR},1G,100K \
+  STOPTASKS,\${DL_DIR},1G,100K \
+  STOPTASKS,\${SSTATE_DIR},1G,100K \
+  STOPTASKS,/tmp,100M,100K \
+  ABORT,\${TMPDIR},100M,1K \
+  ABORT,\${DL_DIR},100M,1K \
+  ABORT,\${SSTATE_DIR},100M,1K \
+  ABORT,/tmp,10M,1K \
+"
+
+BBLAYERS_CONF_PATH="$BUILD_DIR/conf/bblayers.conf"
+BBLAYERS_LIST="\
+  poky/meta \
+  poky/meta-poky \
+  poky/meta-yocto-bsp \
+  \
+  meta-openembedded/meta-oe \
+  meta-openembedded/meta-networking \
+  meta-openembedded/meta-python \
+  \
+  meta-freescale \
+  \
+  meta-scalys-arm \
+"
+
+
+#### AUX #######################################################################
+
 err() {
     echo "Error:" $@
-    exit 1
+    return 1
 }
 warn() {
     echo "Warning:" $@
@@ -14,59 +50,60 @@ info() {
 }
 
 
-THIS_ENV_FILE="grapeboard-env"
-OE_ENV_FILE="sources/poky/oe-init-build-env"
-BUILD_DIR="build"
-BSP_DIR="$(pwd)"
+#### Functions #################################################################
 
-[ -f "$THIS_ENV_FILE" ] || err "this environment should be sourced from the BSP directory"
-[ -f "$OE_ENV_FILE" ] || err "sources are not pulled"
-
-unset GEN_CONF
-[ -f "$BUILD_DIR/conf/bblayers.conf" -a -f "$BUILD_DIR/conf/local.conf" ] || GEN_CONF=y
-
-source "$OE_ENV_FILE"
-
-if [ -n "$GEN_CONF" ]; then
-    cat <<EOF > "$BSP_DIR/$BUILD_DIR/conf/local.conf"
+local_conf_generate() {
+    cat <<EOF > "$LOCAL_CONF_PATH"
 MACHINE = "grapeboard"
 DISTRO ?= "poky"
 PACKAGE_CLASSES ?= "package_ipk"
 EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
 USER_CLASSES ?= "buildstats image-mklibs image-prelink"
 PATCHRESOLVE = "noop"
-
-BB_DISKMON_DIRS = "\\ 
-    STOPTASKS,\${TMPDIR},1G,100K \\ 
-    STOPTASKS,\${DL_DIR},1G,100K \\ 
-    STOPTASKS,\${SSTATE_DIR},1G,100K \\ 
-    STOPTASKS,/tmp,100M,100K \\ 
-    ABORT,\${TMPDIR},100M,1K \\ 
-    ABORT,\${DL_DIR},100M,1K \\ 
-    ABORT,\${SSTATE_DIR},100M,1K \\ 
-    ABORT,/tmp,10M,1K"
-
-CONF_VERSION = "1"
 EOF
+    echo "BB_DISKMON_DIRS = \"\\" >> "$LOCAL_CONF_PATH"
 
-    cat <<EOF > "$BSP_DIR/$BUILD_DIR/conf/bblayers.conf"
+    for layer in $LOCAL_CONF_LIST; do
+        echo "  $LAYERS_DIR/$layer \\" >> "$LOCAL_CONF_PATH"
+    done
+    echo "\"" >> "$LOCAL_CONF_PATH"
+
+    echo "CONF_VERSION = \"1\"" >> "$LOCAL_CONF_PATH"
+
+}
+
+bblayers_conf_generate() {
+    cat <<EOF > "$BBLAYERS_CONF_PATH"
 POKY_BBLAYERS_CONF_VERSION = "2"
 
 BBPATH = "\${TOPDIR}"
 BBFILES ?= ""
 
-BBLAYERS ?= "\\ 
-  ${BSP_DIR}/sources/poky/meta \\ 
-  ${BSP_DIR}/sources/poky/meta-poky \\ 
-  ${BSP_DIR}/sources/poky/meta-yocto-bsp \\ 
-  \\ 
-  ${BSP_DIR}/sources/meta-openembedded/meta-oe \\ 
-  ${BSP_DIR}/sources/meta-openembedded/meta-networking \\ 
-  ${BSP_DIR}/sources/meta-openembedded/meta-python \\ 
-  \\ 
-  ${BSP_DIR}/sources/meta-freescale \\ 
-  \\ 
-  ${BSP_DIR}/sources/meta-scalys-arm \\ 
-  "
+BBLAYERS ?= "\\
 EOF
+
+    for layer in $BBLAYERS_LIST; do
+        echo "  $SOURCES_DIR/$layer \\" >> "$BBLAYERS_CONF_PATH"
+    done
+    echo "\"" >> "$BBLAYERS_CONF_PATH"
+}
+
+
+#### Main ######################################################################
+
+
+MYSHELL=$(ps -hp $$ | awk '{ print $5 }' | sed 's!.*/!!')
+
+[ "$MYSHELL" == "bash" ] || err "this environment can be sourced from bash only" || return
+[ -f "$THIS_ENV_FILE" ] || err "this environment should be sourced from the BSP directory" || return
+[ -f "$OE_ENV_PATH" ] || err "sources are not pulled" || return
+
+unset GEN_CONF
+[ -f "$BBLAYERS_CONF_PATH" -a -f "$LOCAL_CONF_PATH" ] || GEN_CONF=y
+
+source "$OE_ENV_PATH"
+
+if [ -n "$GEN_CONF" ]; then
+    local_conf_generate
+    bblayers_conf_generate
 fi
