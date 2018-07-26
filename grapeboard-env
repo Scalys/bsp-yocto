@@ -24,11 +24,10 @@ BSP_DIR="$(pwd)"
 
 unset GEN_CONF
 [ -f "$BUILD_DIR/conf/bblayers.conf" -a -f "$BUILD_DIR/conf/local.conf" ] || GEN_CONF=y
+
 source "$OE_ENV_FILE"
 
 if [ -n "$GEN_CONF" ]; then
-    mkdir -p "$BUILD_DIR"
-
     cat <<EOF > "$BSP_DIR/$BUILD_DIR/conf/local.conf"
 MACHINE = "grapeboard"
 DISTRO ?= "poky"
