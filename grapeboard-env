@@ -63,8 +63,8 @@ PATCHRESOLVE = "noop"
 EOF
     echo "BB_DISKMON_DIRS = \"\\" >> "$LOCAL_CONF_PATH"
 
-    for layer in $LOCAL_CONF_LIST; do
-        echo "  $LAYERS_DIR/$layer \\" >> "$LOCAL_CONF_PATH"
+    for dir in $LOCAL_CONF_LIST; do
+        echo "  $dir \\" >> "$LOCAL_CONF_PATH"
     done
     echo "\"" >> "$LOCAL_CONF_PATH"
 
