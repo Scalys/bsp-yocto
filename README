@@ -1,11 +1,5 @@
 Grapeboard is a development board based on NXP LS1012A processor.
 
-# Get sources
-
-To download required yocto layers pull all git submodules recursively:
-$ git submodules init
-$ git submodules update --recursive --remote
-
 # Build
 
 To build image first source the environment script:
@@ -14,10 +8,10 @@ $ source grapeboard-env
 Then build image either for SD card/USB stick/SSD driver with:
 $ bitbake scalys-base-image
 
-Or the version for deploy on the internal QSPI flesh memory:
+Or the version for deployment on the internal QSPI flesh memory:
 $ bitbake scalys-base-image-qspi
 
-All the built images will be availabe at <BSP>/build/tmp/deploy/images/grapeboard
+Once build completes, all the built images will be availabe at <BSP>/build/tmp/deploy/images/grapeboard
 
 
 # Deploy
@@ -34,7 +28,7 @@ configuration take the needed image.
 
 1. Put the generated u-boot image in the root of the SD card.
 2. Rename it as a u-boot-with-pbl.bin
-3. Boot the grapeboard and stop the boot process at the bootloader stage.
+3. Power on the Grapeboard and stop the boot process at the bootloader stage.
 4. Run the u-boot update scrip:
 => run update_mmc_uboot_qspi_nor
 
@@ -57,13 +51,17 @@ configuration take the needed image.
 1. Format SD card into a single ext4 partition
 2. Unpack contents of the generated scalys-base-image-grapeboard.tar.gz to the SD card
 
-## QSPI root
+# Development
 
-1. Put the ubi image file scalys-base-image-qspi-grapeboard.ubi on the SD card.
-2. Boot the Grapeboard from SD card
-3. Format root partition with the selected image:
-$ ubiformat /dev/mtd4 -f /scalys-base-image-qspi-grapeboard.ubi
+Development of custom applications for the Yocto-based BSP can be done via Yocto
+SDK. It includes compilers, linker and all the development files for packages
+configured in the scalys-base-image image. Pre-built version of this SDK is
+available in a form of shell script poky-glibc-x86_64-s-tracks-image-base-aarch64-toolchain-2.5.sh.
 
-# Boot
+To install it execute the script and enter SDK installation path. Once installed, source generated environment via:
+$ source /opt/poky/2.5/environment-setup-aarch64-poky-linux
 
-Note that to boot from QSPI memory SD card should be
+To build an SDK for a custom image with set of packages different from the default one:
+$ bitbake -c populate_sdk <custom_image>.
+
+The resulting SDK would be located in the directory <BSP>/build/tmp/deploy/sdk.
