@@ -1,8 +1,24 @@
 Grapeboard is a development board based on NXP LS1012A processor.
 
+
+# Environment
+
+BSP build was verified to work on Debian Jessie. To install all included packages:
+$ apt-get update
+$ apt-get install binutils bzip2 chrpath cpio cpp diffstat g++ gawk gcc git make patch wget
+$ apt-get install python3
+
+
+# Download
+
+This BSP is organized using git submodules. To fetch latest BSP version use command:
+$ git clone --recursive https://github.com/githaff/yocto-bsp.git
+
+
 # Build
 
-To build image first source the environment script:
+To build image first go into the BSP sources directory and source the environment script:
+$ cd <bsp-location>
 $ source grapeboard-env
 
 Then build image either for SD card/USB stick/SSD driver with:
@@ -50,6 +66,7 @@ configuration take the needed image.
 
 1. Format SD card into a single ext4 partition
 2. Unpack contents of the generated scalys-base-image-grapeboard.tar.gz to the SD card
+
 
 # Development
 
