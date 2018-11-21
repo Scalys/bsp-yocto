@@ -11,6 +11,6 @@
 	url = https://git.yoctoproject.org/cgit/cgit.cgi/meta-freescale
 	branch = sumo
 [submodule "sources/meta-scalys-arm"]
-	path = sources/meta-scalys-arm
+	path = sources/meta-scalys
 	url = https://ladm@source-ext.sintecs.nl/scalys/meta-scalys-arm
 	branch = master

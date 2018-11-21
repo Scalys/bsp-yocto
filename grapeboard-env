@@ -32,7 +32,7 @@ BBLAYERS_LIST="\
   \
   meta-freescale \
   \
-  meta-scalys-arm \
+  meta-scalys \
 "
 
 
