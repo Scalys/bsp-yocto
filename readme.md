@@ -15,7 +15,7 @@ $ apt-get install python3
 
 This BSP is organized using git submodules. To fetch latest BSP version use command:
 ```
-$ git clone --recursive https://github.com/githaff/yocto-bsp.git
+$ git clone --recursive https://github.com/Scalys/yocto-bsp.git
 ```
 
 # Build
