@@ -20,6 +20,19 @@ $ cd <bsp-location>
 $ source trustbox-env
 ```
 
+Note: to enable mender firmware update integration add to the generated build/conf/local.conf:
+```
+MENDER_FEATURES_ENABLE_append = " mender-uboot"
+```
+And to the build/conf/bblayers.conf:
+```
+...
+  /home/haff/work/trustbox/yocto-bsp/sources/meta-freescale \
+  /home/haff/work/trustbox/yocto-bsp/sources/meta-mender/meta-mender-core \
+  /home/haff/work/trustbox/yocto-bsp/sources/meta-scalys \
+...
+```
+
 Then build image either for SD card/USB stick/SSD driver with:
 ```
 $ bitbake scalys-base-image
