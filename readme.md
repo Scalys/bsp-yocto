@@ -1,21 +1,15 @@
-Grapeboard is a development board based on NXP LS1012A processor.
-
+TrustBox is a secure communication edge device by Scalys based on NXP LS1012A processor.
 
 # Environment
 
-BSP build was verified to work on Debian Jessie. To install all included packages:
-```
-$ apt-get update
-$ apt-get install binutils bzip2 chrpath cpio cpp diffstat g++ gawk gcc git make patch wget
-$ apt-get install python3
-```
-
+BSP build was verified to work on Ubuntu 18.04. For a reference build environment
+please look at docker/.
 
 # Download
 
 This BSP is organized using git submodules. To fetch latest BSP version use command:
 ```
-$ git clone --recursive https://github.com/Scalys/yocto-bsp.git
+$ git clone --recursive https://github.com/Scalys/yocto-bsp.git -b thud
 ```
 
 # Build
@@ -23,7 +17,7 @@ $ git clone --recursive https://github.com/Scalys/yocto-bsp.git
 To build image first go into the BSP sources directory and source the environment script:
 ```
 $ cd <bsp-location>
-$ source grapeboard-env
+$ source trustbox-env
 ```
 
 Then build image either for SD card/USB stick/SSD driver with:
@@ -36,7 +30,7 @@ Or the version for deployment on the internal QSPI flesh memory:
 $ bitbake scalys-base-image-qspi
 ```
 
-Once build completes, all the built images will be availabe at <BSP>/build/tmp/deploy/images/grapeboard
+Once build completes, all the built images will be availabe at <BSP>/build/tmp/deploy/images/trustbox
 
 
 # Deploy
@@ -62,7 +56,7 @@ configuration take the needed image.
 ## PFE firmware
 
 1. Place the pfe firmware engine-pfe-bin/pfe_fw_sbl.itb in the SD card root
-2. Boot the grapeboard and stop the boot process at the bootloader stage.
+2. Boot the trustbox and stop the boot process at the bootloader stage.
 3. Run the pfe update scrip:
 ```
 => run update_mmc_pfe_qspi_nor
@@ -71,7 +65,7 @@ configuration take the needed image.
 ## PPA firmware
 
 1. Place the ppa firmware ppa.itb in the SD card root
-2. Boot the grapeboard and stop the boot process at the bootloader stage.
+2. Boot the trustbox and stop the boot process at the bootloader stage.
 3. Run the ppa update scrip:
 ```
 => run update_mmc_ppa_qspi_nor
@@ -80,7 +74,7 @@ configuration take the needed image.
 ## SD card root
 
 1. Format SD card into a single ext4 partition
-2. Unpack contents of the generated scalys-base-image-grapeboard.tar.gz to the SD card
+2. Unpack contents of the generated scalys-base-image-trustbox.tar.gz to the SD card
 
 
 # Development

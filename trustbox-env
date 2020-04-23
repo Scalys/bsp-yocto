@@ -1,9 +1,9 @@
-# Grapeboard Yocto build environment deployment
+# TrustBox Yocto build environment deployment
 # Author: Lavnikevich Dmitry <dmitry.lavnikevich@edality.by>
 
 
 BSP_DIR="$(pwd)"
-THIS_ENV_FILE="grapeboard-env"
+THIS_ENV_FILE="trustbox-env"
 OE_ENV_PATH="$BSP_DIR/sources/poky/oe-init-build-env"
 BUILD_DIR="$BSP_DIR/build"
 SOURCES_DIR="$BSP_DIR/sources"
@@ -34,6 +34,8 @@ BBLAYERS_LIST="\
   \
   meta-freescale \
   \
+  meta-mender/meta-mender-core \
+  \
   meta-scalys \
 "
 
@@ -56,7 +58,7 @@ info() {
 
 local_conf_generate() {
     cat <<EOF > "$LOCAL_CONF_PATH"
-MACHINE = "grapeboard"
+MACHINE = "trustbox"
 DISTRO ?= "poky"
 PACKAGE_CLASSES ?= "package_ipk"
 EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
