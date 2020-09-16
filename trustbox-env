@@ -29,6 +29,7 @@ BBLAYERS_LIST="\
   meta-openembedded/meta-oe \
   meta-openembedded/meta-networking \
   meta-openembedded/meta-python \
+  meta-openembedded/meta-filesystems \
   \
   meta-cloud-services \
   \

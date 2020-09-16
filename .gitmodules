@@ -1,24 +1,24 @@
 [submodule "sources/poky"]
 	path = sources/poky
 	url = git://git.yoctoproject.org/poky
-	branch = sumo
+	branch = dunfell
 [submodule "sources/meta-openembedded"]
 	path = sources/meta-openembedded
 	url = git://git.openembedded.org/meta-openembedded
-	branch = sumo
+	branch = dunfell
 [submodule "sources/meta-freescale"]
 	path = sources/meta-freescale
 	url = https://git.yoctoproject.org/cgit/cgit.cgi/meta-freescale
-	branch = sumo
+	branch = dunfell
 [submodule "sources/meta-scalys"]
 	path = sources/meta-scalys
 	url = https://github.com/Scalys/meta-scalys.git
-	branch = master
+	branch = thud
 [submodule "sources/meta-cloud-services"]
 	path = sources/meta-cloud-services
 	url = git://git.yoctoproject.org/meta-cloud-services
-	branch = sumo
+	branch = dunfell
 [submodule "sources/meta-mender"]
 	path = sources/meta-mender
 	url = https://github.com/mendersoftware/meta-mender.git
-	branch = thud
+	branch = dunfell
