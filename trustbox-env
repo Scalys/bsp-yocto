@@ -30,8 +30,12 @@ BBLAYERS_LIST="\
   meta-openembedded/meta-networking \
   meta-openembedded/meta-python \
   meta-openembedded/meta-filesystems \
+  meta-virtualization \
+  meta-rust \
   \
   meta-cloud-services \
+  \
+  meta-iotedge \
   \
   meta-freescale \
   \
