@@ -69,6 +69,7 @@ PACKAGE_CLASSES ?= "package_ipk"
 EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
 USER_CLASSES ?= "buildstats image-mklibs image-prelink"
 PATCHRESOLVE = "noop"
+
 EOF
     echo "BB_DISKMON_DIRS = \"\\" >> "$LOCAL_CONF_PATH"
 
