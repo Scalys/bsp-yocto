@@ -39,8 +39,6 @@ BBLAYERS_LIST="\
   \
   meta-freescale \
   \
-  meta-mender/meta-mender-core \
-  \
   meta-scalys \
 "
 
