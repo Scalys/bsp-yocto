@@ -32,6 +32,6 @@
 	branch = dunfell
 [submodule "sources/meta-iotedge"]
 	path = sources/meta-iotedge
-	url = https://github.com/Scalys/meta-iotedge.git
-	branch = master
+	url = https://github.com/Azure/meta-iotedge.git
+	branch = dunfell
 
