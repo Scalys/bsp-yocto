@@ -5,6 +5,17 @@ TrustBox is a secure communication edge device by Scalys based on NXP LS1012A pr
 BSP build was verified to work on Ubuntu 18.04. For a reference build environment
 please look at docker/.
 
+# Docker environment
+
+This BSP was verified with a Ubuntu 18.04 build envrionment. It is provided with this BSP and can be created with:
+
+```
+$ cd docker/ubuntu-18.04
+$ make
+$ cd ../..
+$ ./docker/ubuntu-18.04/run.sh trustbox-builder builder
+```
+
 # Download
 
 This BSP is organized using git submodules. To fetch latest BSP version use command:
@@ -109,13 +120,3 @@ $ bitbake -c populate_sdk <custom_image>
 
 The resulting SDK will be located in the directory <BSP>/build/tmp/deploy/sdk.
 
-# Docker environment
-
-This BSP provides a Docker BSP development environment. To build it:
-
-$ cd docker/ubuntu-18.04
-$ make
-$ cd ../..
-$ ./docker/ubuntu-18.04/run.sh trustbox-builder builder
-
-As a result docker container named trustbox-builder will be started and attached. All the build instructions from this manual are tested out in this build environment.
