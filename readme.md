@@ -9,7 +9,7 @@ please look at docker/.
 
 This BSP is organized using git submodules. To fetch latest BSP version use command:
 ```
-$ git clone --recursive https://github.com/Scalys/yocto-bsp.git -b thud
+$ git clone --recursive https://github.com/Scalys/yocto-bsp.git -b dunfell
 ```
 
 # Build
@@ -108,3 +108,14 @@ $ bitbake -c populate_sdk <custom_image>
 ```
 
 The resulting SDK will be located in the directory <BSP>/build/tmp/deploy/sdk.
+
+# Docker environment
+
+This BSP provides a Docker BSP development environment. To build it:
+
+$ cd docker/ubuntu-18.04
+$ make
+$ cd ../..
+$ ./docker/ubuntu-18.04/run.sh trustbox-builder builder
+
+As a result docker container named trustbox-builder will be started and attached. All the build instructions from this manual are tested out in this build environment.
