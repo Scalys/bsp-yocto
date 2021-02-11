@@ -20,7 +20,7 @@ $ ./docker/ubuntu-18.04/run.sh trustbox-builder builder
 
 This BSP is organized using git submodules. To fetch latest BSP version use command:
 ```
-$ git clone --recursive https://github.com/Scalys/yocto-bsp.git -b dunfell
+$ git clone --recursive https://github.com/Scalys/bsp-yocto.git -b dunfell
 ```
 
 # Build
@@ -38,9 +38,9 @@ MENDER_FEATURES_ENABLE_append = " mender-uboot"
 And to the build/conf/bblayers.conf:
 ```
 ...
-  /home/haff/work/trustbox/yocto-bsp/sources/meta-freescale \
-  /home/haff/work/trustbox/yocto-bsp/sources/meta-mender/meta-mender-core \
-  /home/haff/work/trustbox/yocto-bsp/sources/meta-scalys \
+  /home/haff/work/trustbox/bsp-yocto/sources/meta-freescale \
+  /home/haff/work/trustbox/bsp-yocto/sources/meta-mender/meta-mender-core \
+  /home/haff/work/trustbox/bsp-yocto/sources/meta-scalys \
 ...
 ```
 
