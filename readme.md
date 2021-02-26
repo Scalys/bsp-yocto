@@ -1,5 +1,12 @@
 TrustBox is a secure communication edge device by Scalys based on NXP LS1012A processor.
 
+# Download
+
+This BSP is organized using git submodules. To fetch latest BSP version use command:
+```
+$ git clone --recursive https://github.com/Scalys/bsp-yocto.git -b dunfell
+```
+
 # Environment
 
 BSP build was verified to work on Ubuntu 18.04. For a reference build environment
@@ -14,13 +21,6 @@ $ cd docker/ubuntu-18.04
 $ make
 $ cd ../..
 $ ./docker/ubuntu-18.04/run.sh trustbox-builder builder
-```
-
-# Download
-
-This BSP is organized using git submodules. To fetch latest BSP version use command:
-```
-$ git clone --recursive https://github.com/Scalys/bsp-yocto.git -b dunfell
 ```
 
 # Build
