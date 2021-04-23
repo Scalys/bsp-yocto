@@ -28,5 +28,5 @@ docker ps -a --format "{{.Names}}" | grep -q "^$CONTAINER$" && {
 	exit 1
 }
 
-docker run -t -i -h "$HOST" --net=host --name="$CONTAINER" -v $HOME:$HOME -v /lib/modules:/lib/modules --add-host "$HOST:127.0.0.1" -w $PWD "trustbox-builder-18.04" /bin/bash
+docker run -t -i -h "$HOST" --rm --group-add $(id -g) --net=host --name="$CONTAINER" -v $HOME:$HOME -v /lib/modules:/lib/modules --add-host "$HOST:127.0.0.1" -w $PWD "trustbox-builder-18.04" /bin/bash
 
