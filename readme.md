@@ -76,6 +76,13 @@ configuration take the needed image.
 ```
 => run update_mmc_uboot_qspi_nor
 ```
+5. After update reset the environment to a default environment
+```
+=> reset
+<once again stop boot during countdown>
+=> env default -a
+=> saveenv
+```
 
 ## PFE firmware
 
