@@ -8,7 +8,7 @@
 	branch = dunfell
 [submodule "sources/meta-freescale"]
 	path = sources/meta-freescale
-	url = https://git.yoctoproject.org/cgit/cgit.cgi/meta-freescale
+	url = https://git.yoctoproject.org/git/meta-freescale
 	branch = dunfell
 [submodule "sources/meta-scalys"]
 	path = sources/meta-scalys

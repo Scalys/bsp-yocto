@@ -61,7 +61,7 @@ info() {
 
 local_conf_generate() {
     cat <<EOF > "$LOCAL_CONF_PATH"
-MACHINE = "trustbox"
+MACHINE = "trustbox-edge-101"
 DISTRO ?= "poky"
 PACKAGE_CLASSES ?= "package_ipk"
 EXTRA_IMAGE_FEATURES ?= "debug-tweaks"

@@ -9,18 +9,15 @@ $ git clone --recursive https://github.com/Scalys/bsp-yocto.git -b dunfell
 
 # Environment
 
-BSP build was verified to work on Ubuntu 18.04. For a reference build environment
+BSP build was verified to work on Ubuntu 20.04. For a reference build environment
 please look at docker/.
 
 # Docker environment
 
-This BSP was verified with a Ubuntu 18.04 build envrionment. It is provided with this BSP and can be created with:
+This BSP was verified with a Ubuntu 20.04 build envrionment. It is provided with this BSP and can be run with:
 
 ```
-$ cd docker/ubuntu-18.04
-$ make
-$ cd ../..
-$ ./docker/ubuntu-18.04/run.sh trustbox-builder builder
+$ ./docker/run.sh
 ```
 
 # Build
