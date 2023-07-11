@@ -38,3 +38,7 @@
 	path = sources/meta-security
 	url = git://git.yoctoproject.org/meta-security
 	branch = dunfell
+[submodule "sources/sources/meta-clang"]
+	path = sources/meta-clang
+	url = https://github.com/kraj/meta-clang.git
+	branch = dunfell
