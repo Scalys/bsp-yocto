@@ -36,7 +36,9 @@ BBLAYERS_LIST="\
   \
   meta-cloud-services \
   \
+  meta-clang \
   meta-security \
+  meta-security/meta-tpm \
   meta-iotedge \
   \
   meta-freescale \
