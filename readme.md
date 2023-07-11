@@ -1,5 +1,6 @@
 TrustBox is a secure communication edge device by Scalys based on NXP LS1012A processor.
 
+
 # Download
 
 This BSP is organized using git submodules. To fetch latest BSP version use command:
@@ -26,19 +27,6 @@ To build image first go into the BSP sources directory and source the environmen
 ```
 $ cd <bsp-location>
 $ source trustbox-env
-```
-
-Note: to enable mender firmware update integration add to the generated build/conf/local.conf:
-```
-MENDER_FEATURES_ENABLE_append = " mender-uboot"
-```
-And to the build/conf/bblayers.conf:
-```
-...
-  /home/haff/work/trustbox/bsp-yocto/sources/meta-freescale \
-  /home/haff/work/trustbox/bsp-yocto/sources/meta-mender/meta-mender-core \
-  /home/haff/work/trustbox/bsp-yocto/sources/meta-scalys \
-...
 ```
 
 Then build image either for SD card/USB stick/SSD driver with:
