@@ -34,4 +34,7 @@
 	path = sources/meta-iotedge
 	url = https://github.com/Azure/meta-iotedge.git
 	branch = dunfell
-
+[submodule "sources/meta-security"]
+	path = sources/meta-security
+	url = git://git.yoctoproject.org/meta-security
+	branch = dunfell
