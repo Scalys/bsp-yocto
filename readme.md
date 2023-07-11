@@ -41,6 +41,16 @@ $ bitbake scalys-base-image-qspi
 
 Once build completes, all the built images will be availabe at <BSP>/build/tmp/deploy/images/trustbox
 
+## Build with Azure IoT Edge
+
+If IoT Edge toolset it needed, enable it by adding:
+
+```
+IMAGE_INSTALL_append = " aziot-edged"
+```
+
+to build/conf/local.conf
+
 
 # Deploy
 
