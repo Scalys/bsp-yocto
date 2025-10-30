@@ -46,7 +46,7 @@ BBLAYERS_LIST="\
   \
   meta-freescale \
   meta-freescale-distro \
-  meta-qoriq \
+  meta-qoriq/meta-qoriq-bsp \
   \
   meta-scalys \
 "
